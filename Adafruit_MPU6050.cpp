@@ -67,7 +67,7 @@ Adafruit_MPU6050::~Adafruit_MPU6050(void) {
  *    @return True if initialization was successful, otherwise false.
  */
 
-bool Adafruit_MPU6050::begin(uint8_t i2c_address, TwoWire *wire,
+int Adafruit_MPU6050::begin(uint8_t i2c_address, TwoWire *wire,
                              int32_t sensor_id) {
   if (i2c_dev) {
     delete i2c_dev; // remove old interface
@@ -85,14 +85,14 @@ bool Adafruit_MPU6050::begin(uint8_t i2c_address, TwoWire *wire,
     delay(10);
   }
   if (!mpu_found)
-    return false;
+    return MPU6050_BEGIN_NOT_FOUND;
 
   Adafruit_BusIO_Register chip_id =
       Adafruit_BusIO_Register(i2c_dev, MPU6050_WHO_AM_I, 1);
 
   // make sure we're talking to the right chip
   if (chip_id.read() != MPU6050_DEVICE_ID) {
-    return false;
+    return MPU6050_BEGIN_INVALID_CHIP;
   }
 
   return _init(sensor_id);
@@ -137,7 +137,7 @@ bool Adafruit_MPU6050::_init(int32_t sensor_id) {
   accel_sensor = new Adafruit_MPU6050_Accelerometer(this);
   gyro_sensor = new Adafruit_MPU6050_Gyro(this);
 
-  return true;
+  return MPU6050_BEGIN_ALL_GOOD;
 }
 /**************************************************************************/
 /*!
