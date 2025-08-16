@@ -55,6 +55,10 @@
 #define MPU6050_MOT_DUR                                                        \
   0x20 ///< Duration counter threshold for motion int. 1 kHz rate, LSB = 1 ms
 
+#define MPU6050_BEGIN_ALL_GOOD 0
+#define MPU6050_BEGIN_INVALID_CHIP 1
+#define MPU6050_BEGIN_NOT_FOUND 2
+
 /**
  * @brief FSYNC output values
  *
