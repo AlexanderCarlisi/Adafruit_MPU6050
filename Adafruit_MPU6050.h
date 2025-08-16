@@ -212,7 +212,7 @@ public:
   Adafruit_MPU6050();
   ~Adafruit_MPU6050();
 
-  bool begin(uint8_t i2c_addr = MPU6050_I2CADDR_DEFAULT, TwoWire *wire = &Wire,
+  int begin(uint8_t i2c_addr = MPU6050_I2CADDR_DEFAULT, TwoWire *wire = &Wire,
              int32_t sensorID = 0);
 
   // Adafruit_Sensor API/Interface
